@@ -856,7 +856,7 @@ void MyClass::Loop(int job, std::string fList){
 
 //Code enters execution here
 int main(int argc, const char* argv[])
-{   /*
+{   
     if(argc != 4)
     {
         std::cout << "Usage: Z_mumu_Channel <fileList> <jobNumber> <nJobs>" << std::endl;
@@ -892,13 +892,13 @@ int main(int argc, const char* argv[])
             line++;
         }
     }
-    */
 
+/*
     int job=1;
-
-    std::string fList="MATCH_data .root";
+    std::string fList="MATCH_data.root";
     std::vector<std::string> listOfFiles;
     listOfFiles.push_back(fList);
+*/
     //create the MyClass Object
     MyClass m = MyClass(listOfFiles);
     m.InitCutmode(3);
