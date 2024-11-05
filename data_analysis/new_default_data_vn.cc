@@ -55,6 +55,7 @@ void MyClass::GenBackGround(long  Npairs,TH2D *hraw,TH2D *hbkg){
     std::vector<float> A_ETA_Cor(XENT);
     std::vector<float> A_PHI_Cor(XENT);
 
+    cout<<Npairs<<endl;
     cout<<XENT<<endl;
 
     for(int x = 0; x<XENT; x++){
