@@ -149,8 +149,6 @@ void MyClass::Loop(int job, std::string fList){
     TH1D* hBinDist_cor[beta_bin][SDclassifer_bin][trackbin];
     TH1D* hBinDist_unc[beta_bin][SDclassifer_bin][trackbin];
 
-    long int Pairs[beta_bin][SDclassifer_bin][trackbin][ptbin]={0};
-
     for(int wtrk = 1; wtrk<trackbin+1; wtrk++){
         //hBinDist_cor[wtrk-1]    = new TH1D(Form("hBinDist_cor_%d",wtrk),Form("hBinDist_cor_%d",wtrk), bin360, bin0, bin120);
         //hBinDist_unc[wtrk-1]    = new TH1D(Form("hBinDist_unc_%d",wtrk),Form("hBinDist_unc_%d",wtrk), bin120, bin0, bin120);
@@ -722,8 +720,6 @@ void MyClass::Loop(int job, std::string fList){
                                             //cout << "1.0/(Atrk_weight*Ttrk_weight*NtrigCorrected[i][j]) " << 1.0/(Atrk_weight * Ttrk_weight * NtrigCorrected[i][j] ) << " and components: " << Atrk_weight << " " << Ttrk_weight << " " << NtrigCorrected[i][j] << endl;
 
                                             hPairs[ibeta][iclass]->Fill(iNch,ipt);
-                                            Pairs[ibeta][iclass][iNch][ipt]++;
-                                            cout<<Pairs[ibeta][iclass][iNch][ipt]<<endl;
                                             if(Atrk_weight == 0){/* cout  << "Atrk_weight = 0!" << endl;
                                             */
                                                 continue;}
@@ -782,7 +778,7 @@ void MyClass::Loop(int job, std::string fList){
             for(int iNch=0;iNch<trackbin;iNch++){
                 for(int ipt=0;ipt<ptbin;ipt++){
                     int i_PU=0;
-                    GenBackGround(Pairs[ibeta][iclass][iNch][ipt],hEPDrawCor[ibeta][iclass][iNch][ipt][i_PU],hBckrndShiftedCor[ibeta][iclass][iNch][ipt][i_PU]);
+                    GenBackGround((int)hPairs[ibeta][iclass]->GetBinContent(iNch+1,ipt+1),hEPDrawCor[ibeta][iclass][iNch][ipt][i_PU],hBckrndShiftedCor[ibeta][iclass][iNch][ipt][i_PU]);
                     cout<<"genBack"<<endl;
                 }
             }
