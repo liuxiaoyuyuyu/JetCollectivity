@@ -188,7 +188,10 @@ void MyClass::Loop(int job, std::string fList){
     TH1D *hZgTgB_dis_Nch[beta_bin][trackbin];                                                                                       
     TH1D *hZg_dis_Nch[beta_bin][trackbin];                                                                                     
     TH1D *hRg_dis_Nch[beta_bin][trackbin];  
-    TH1D *hSDJetMass_dis_Nch[beta_bin][trackbin];                                                                                   
+    TH1D *hSDJetMass_dis_Nch[beta_bin][trackbin]; 
+
+    TH1D *hStoredSDJetMassNch=new TH1D("hStoredSDJetMassNch","hStoredSDJetMassNch",300,0,300); 
+    TH1D *hCalSDJetMassNch=new TH1D("hCalSDJetMassNch","hCalSDJetMassNch",300,0,300); 
 
     for(int ibeta=0;ibeta<beta_bin;ibeta++){
 
@@ -332,13 +335,18 @@ void MyClass::Loop(int job, std::string fList){
             //**********************************************ENTERING JET LOOP*****************************************
             for(int ijet=0; ijet < jetCounter; ijet++){
 
+                //std::cout<<"*****************"<<std::endl;
+                //std::cout<<"stored softjet mass="<<(*jetSoftDropMass)[ijet]<<std::endl;
+                hStoredSDJetMassNch->Fill( (*jetSoftDropMass)[ijet] );
+
                 //the vector that will store all daughter particles 
                 std::vector< fastjet::PseudoJet > particles; 
                 //fille all the daughter particles;
                 for(int idau=0;idau<(*dau_pt)[ijet].size();idau++){
                     TLorentzVector v;
                     int current_dau_pid=(*dau_pid)[ijet][idau];
-                    v.SetPtEtaPhiM((*dau_pt)[ijet][idau],(*dau_eta)[ijet][idau],(*dau_phi)[ijet][idau],particleData.m0(current_dau_pid));
+                    //v.SetPtEtaPhiM((*dau_pt)[ijet][idau],(*dau_eta)[ijet][idau],(*dau_phi)[ijet][idau],particleData.m0(current_dau_pid));
+                    v.SetPtEtaPhiM((*dau_pt)[ijet][idau],(*dau_eta)[ijet][idau],(*dau_phi)[ijet][idau],(*dau_mass)[ijet][idau] );
                     fastjet::PseudoJet particle( v.Px(),v.Py(),v.Pz(),v.E() );
                     particles.push_back(particle);
                 }
@@ -380,8 +388,12 @@ void MyClass::Loop(int job, std::string fList){
                     Rgs.push_back(    sd_jet.structure_of<fastjet::contrib::SoftDrop>().delta_R()   );
                     ZgTgBs.push_back( Zgs[ibeta]*TMath::Power(Rgs[ibeta]/R,beta_SD[ibeta]) );
                     SDJetMass.push_back(sd_jet.m());
-                }
+                    //std::cout<<"calculated softdrop jet mass:"<<std::endl;
+                    //std::cout<<"beta="<<beta_SD[ibeta]<<" "<<" softdrop jet mass="<<sd_jet.m()<<std::endl;
+                    if(beta_SD[ibeta]==0) hCalSDJetMassNch->Fill( sd_jet.m() );
 
+                }
+                //std::cout<<"**********************"<<std::endl;
                 //fill substructure histogram:do this after indentify Nch and cut on jet pt
 
 
@@ -765,7 +777,7 @@ void MyClass::Loop(int job, std::string fList){
             for(int iNch=0;iNch<trackbin;iNch++){
                 for(int ipt=0;ipt<ptbin;ipt++){
                     int i_PU=0;
-                    //GenBackGround(Pairs[ibeta][iclass][iNch][ipt],hEPDrawCor[ibeta][iclass][iNch][ipt][i_PU],hBckrndShiftedCor[ibeta][iclass][iNch][ipt][i_PU]);
+                    GenBackGround(Pairs[ibeta][iclass][iNch][ipt],hEPDrawCor[ibeta][iclass][iNch][ipt][i_PU],hBckrndShiftedCor[ibeta][iclass][iNch][ipt][i_PU]);
 
                 }
             }
@@ -825,7 +837,8 @@ void MyClass::Loop(int job, std::string fList){
             hPairs[ibeta][iclass]->Write();
         }
     }
-
+    hCalSDJetMassNch->Write();
+    hStoredSDJetMassNch->Write();
     hNtrig->Write();
     hNtrigCorrected->Write();
     hTotalWeight->Write();

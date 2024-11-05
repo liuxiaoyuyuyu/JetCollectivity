@@ -91,6 +91,8 @@ public :
    vector<vector<float> > *dau_vz;
    vector<vector<float> > *dau_vy;
    vector<vector<float> > *dau_vx;
+   vector<vector<float> > *dau_mass;
+   vector<float > *jetSoftDropMass;
 
    // List of branches
    TBranch        *b_nRun;   //!
@@ -115,7 +117,8 @@ public :
    TBranch        *b_dau_vz;   //!
    TBranch        *b_dau_vy;   //!
    TBranch        *b_dau_vx;   //!
-
+   TBranch        *b_dau_mass;   //!
+   TBranch        *b_jetSoftDropMass;
 
    //SoftDrop 
    std::vector< fastjet::contrib::SoftDrop * > sd;
@@ -208,6 +211,8 @@ void MyClass::Init(TTree *tree)
    dau_vz = 0;
    dau_vy = 0;
    dau_vx = 0;
+   jetSoftDropMass = 0;
+   dau_mass = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -233,6 +238,8 @@ void MyClass::Init(TTree *tree)
    fChain->SetBranchAddress("dau_pid", &dau_pid, &b_dau_pid);
    fChain->SetBranchAddress("dau_XYDCAsig", &dau_XYDCAsig, &b_dau_XYDCAsig);
    fChain->SetBranchAddress("dau_ZDCAsig", &dau_ZDCAsig, &b_dau_ZDCAsig);
+   fChain->SetBranchAddress("jetSoftDropMass", &jetSoftDropMass, &b_jetSoftDropMass);
+   fChain->SetBranchAddress("dau_mass", &dau_mass, &b_dau_mass);
    //fChain->SetBranchAddress("dau_vz", &dau_vz, &b_dau_vz);
    //fChain->SetBranchAddress("dau_vy", &dau_vy, &b_dau_vy);
    //fChain->SetBranchAddress("dau_vx", &dau_vx, &b_dau_vx);
