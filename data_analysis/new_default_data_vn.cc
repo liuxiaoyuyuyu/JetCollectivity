@@ -723,6 +723,7 @@ void MyClass::Loop(int job, std::string fList){
 
                                             hPairs[ibeta][iclass]->Fill(iNch,ipt);
                                             Pairs[ibeta][iclass][iNch][ipt]++;
+                                            cout<<Pairs[ibeta][iclass][iNch][ipt]<<endl;
                                             if(Atrk_weight == 0){/* cout  << "Atrk_weight = 0!" << endl;
                                             */
                                                 continue;}
