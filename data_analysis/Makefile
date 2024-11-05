@@ -1,11 +1,11 @@
 EXE=new_default_data_vn
 GCC=g++
 
-PYTHIAINC=${shell /home/fl52/Downloads/pythia8309/bin/pythia8-config --includedir}
-PYTHIALIBS=${shell /home/fl52/Downloads/pythia8309/bin/pythia8-config --libdir}
+PYTHIAINC=${shell /afs/cern.ch/user/x/xiaoyul/pythia8312/bin/pythia8-config --includedir}
+PYTHIALIBS=${shell /afs/cern.ch/user/x/xiaoyul/pythia8312/bin/pythia8-config --libdir}
 
-FASTJETINC=${shell /home/fl52/Downloads/fastjet-install/bin/fastjet-config --cxxflags}
-FASTJETLIBS=${shell /home/fl52/Downloads/fastjet-install/bin/fastjet-config --libs}
+FASTJETINC=${shell /afs/cern.ch/user/x/xiaoyul/fastjet-install/bin/fastjet-config --cxxflags}
+FASTJETLIBS=${shell /afs/cern.ch/user/x/xiaoyul/fastjet-install/bin/fastjet-config --libs}
 
 ROOTCFLAGS   := $(shell root-config --cflags)
 ROOTLIBS     := $(shell root-config --libs)
