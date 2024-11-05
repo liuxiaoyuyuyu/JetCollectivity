@@ -49,14 +49,11 @@ void MyClass::GenBackGround(long  Npairs,TH2D *hraw,TH2D *hbkg){
 
     long  NENT =  Npairs;
     long  XENT =  ((1+floor(sqrt(1+(4*2*backMult*NENT))))/2) ;
-                
+
     //float A_ETA_Cor[XENT] = {0};
     //float A_PHI_Cor[XENT] = {0};
     std::vector<float> A_ETA_Cor(XENT);
     std::vector<float> A_PHI_Cor(XENT);
-
-    cout<<Npairs<<endl;
-    cout<<XENT<<endl;
 
     for(int x = 0; x<XENT; x++){
         gRandom->SetSeed(0);
@@ -67,7 +64,7 @@ void MyClass::GenBackGround(long  Npairs,TH2D *hraw,TH2D *hbkg){
         A_ETA_Cor[x] = WEta1_Cor;
         A_PHI_Cor[x] = WPhi1_Cor;
     }
-    cout<<"h1"<<endl;
+    
     for(long int i = 0; i < (XENT-1); i++){
         for(long int j = (i+1); j < XENT; j++){
 
@@ -185,7 +182,6 @@ void MyClass::Loop(int job, std::string fList){
     TH1D *hZgTgB_dis[beta_bin];
     TH1D *hSDJetMass_dis[beta_bin];
 
-                                                                                                                                                                                       //
     //for different Nch
     TH1D *hZgTgB_dis_Nch[beta_bin][trackbin];                                                                                       
     TH1D *hZg_dis_Nch[beta_bin][trackbin];                                                                                     
@@ -478,7 +474,6 @@ void MyClass::Loop(int job, std::string fList){
                     hRg_dis[ibeta]->Fill(    Rgs[ibeta]           );
                     hZgTgB_dis[ibeta]->Fill( ZgTgBs[ibeta]        );
                     hSDJetMass_dis[ibeta]->Fill( SDJetMass[ibeta] );
-                                                                                                                                                                                       //
    
     
 
@@ -779,7 +774,6 @@ void MyClass::Loop(int job, std::string fList){
                 for(int ipt=0;ipt<ptbin;ipt++){
                     int i_PU=0;
                     GenBackGround((int)hPairs[ibeta][iclass]->GetBinContent(iNch+1,ipt+1),hEPDrawCor[ibeta][iclass][iNch][ipt][i_PU],hBckrndShiftedCor[ibeta][iclass][iNch][ipt][i_PU]);
-                    cout<<"genBack"<<endl;
                 }
             }
         }
