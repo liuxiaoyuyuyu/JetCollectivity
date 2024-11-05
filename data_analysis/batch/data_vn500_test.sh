@@ -11,4 +11,4 @@ cd ~xiaoyul/MYDEMOANALYZER/CMSSW_13_3_0/src/JetCollectivity/data_analysis/batch
 echo PWD: $PWD
 echo $HOSTNAME
 #../bin/new_default_data_vn.exe ./Run3_tree_list/2023/list_25/list_job$1 0 1
-#../bin/new_default_data_vn.exe ./list_test.txt 0 1
+../bin/new_default_data_vn.exe ./list_test.txt 0 1
