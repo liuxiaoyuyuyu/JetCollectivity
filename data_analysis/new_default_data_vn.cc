@@ -337,8 +337,8 @@ void MyClass::Loop(int job, std::string fList){
             //**********************************************ENTERING JET LOOP*****************************************
             for(int ijet=0; ijet < jetCounter; ijet++){
 
-                std::cout<<"*****************"<<std::endl;
-                std::cout<<"stored softjet mass="<<(*jetSoftDropMass)[ijet]<<std::endl;
+                //std::cout<<"*****************"<<std::endl;
+                //std::cout<<"stored softjet mass="<<(*jetSoftDropMass)[ijet]<<std::endl;
                 hStoredSDJetMassNch->Fill( (*jetSoftDropMass)[ijet] );
 
                 //the vector that will store all daughter particles 
@@ -744,13 +744,13 @@ void MyClass::Loop(int job, std::string fList){
                             }    
                         }    
                         //*************************************************END FILL Signal*********************************************************
-
-
-
                     }//****************************************END T_trk LOOP***********************************************
                 }//*****************************************END A_trk LOOP*************************************************
             }//*********************************************END JET LOOP***********************************************
+            cout<<"end jet loop"<<endl;
+
         }//***************************************************END EVENT LOOP*****************************************
+        cout<<"end event loop"<<endl;
         
         fFile->Close();
     }//***********************************************END FILE LOOP*****************************************
@@ -780,7 +780,7 @@ void MyClass::Loop(int job, std::string fList){
                 for(int ipt=0;ipt<ptbin;ipt++){
                     int i_PU=0;
                     GenBackGround(Pairs[ibeta][iclass][iNch][ipt],hEPDrawCor[ibeta][iclass][iNch][ipt][i_PU],hBckrndShiftedCor[ibeta][iclass][iNch][ipt][i_PU]);
-
+                    cout<<"genBack"<<endl;
                 }
             }
         }
