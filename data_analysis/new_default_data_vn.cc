@@ -292,7 +292,7 @@ void MyClass::Loop(int job, std::string fList){
         int thisEffTable =f_from_file;
         */
 
-        TFile* jet_veto_file[2];
+        //TFile* jet_veto_file[2];
         //jet_veto_file[0]=new TFile("~/StorageArea/Summer22_23Sep2023_RunCD_v1.root","read");
         //jet_veto_file[1]=new TFile("~/StorageArea/Summer22EE_23Sep2023_RunEFG_v1.root","read");
         //TH2D* jet_veto_map=(TH2D*)jet_veto_file[0]->Get("jetvetomap");
@@ -314,6 +314,7 @@ void MyClass::Loop(int job, std::string fList){
             int jetCounter = jetPt->size();
             if(jetCounter == 0) continue;
 
+            /*
             //apply jet veto map
             //jet veto, reference: https://cms-jerc.web.cern.ch/Recommendations/#run-3
             //"The safest procedure would be to veto events if ANY jet with a loose selection lies in the veto regions."
@@ -331,12 +332,13 @@ void MyClass::Loop(int job, std::string fList){
             }
 
             if(jetvetoBool) continue;
+            */
 
             //**********************************************ENTERING JET LOOP*****************************************
             for(int ijet=0; ijet < jetCounter; ijet++){
 
-                //std::cout<<"*****************"<<std::endl;
-                //std::cout<<"stored softjet mass="<<(*jetSoftDropMass)[ijet]<<std::endl;
+                std::cout<<"*****************"<<std::endl;
+                std::cout<<"stored softjet mass="<<(*jetSoftDropMass)[ijet]<<std::endl;
                 hStoredSDJetMassNch->Fill( (*jetSoftDropMass)[ijet] );
 
                 //the vector that will store all daughter particles 
