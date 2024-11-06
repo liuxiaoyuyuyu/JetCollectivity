@@ -783,8 +783,8 @@ void MyClass::Loop(int job, std::string fList){
     }
 
     //string subList = fList.substr(fList.size() - 3);
-    //TFile* fS_tempA = new TFile(Form("/eos/cms/store/group/phys_heavyions/xiaoyul/Run3_2022_root_out/allNch/jetveto_CD/job_D_%s.root",subList.c_str()), "recreate");
-    TFile *fout=new TFile("test.root","RECREATE");
+    TFile* fS_tempA = new TFile(Form("/eos/cms/store/group/phys_heavyions/xiaoyul/Run3_2024_root_out/job_%s.root",subList.c_str()), "recreate");
+    //TFile *fout=new TFile("test.root","RECREATE");
     for(int wtrk = 1; wtrk<trackbin+1; wtrk++){
         //hBinDist_cor[wtrk-1]->Write();    
         //hBinDist_unc[wtrk-1]->Write();   
@@ -860,8 +860,8 @@ void MyClass::Loop(int job, std::string fList){
     hjet_eta_phi_before_veto->Write();
     hjet_eta_phi_after_veto->Write();
 
-    //fS_tempA->Close();
-    fout->Close();
+    fS_tempA->Close();
+    //fout->Close();
 }
 
 
